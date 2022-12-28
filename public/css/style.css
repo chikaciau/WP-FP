@@ -101,7 +101,7 @@ nav ul li {
 
 /*-----------------------------*/
 .categories {
-    margin: 70px 0;
+    margin-top: 70px !important;
 }
 
 .small-container {
@@ -255,7 +255,8 @@ small {
     background: #000;
     color: #8a8a8a;
     font-size: 14px;
-    padding: 60px 0 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .footer p {
@@ -316,7 +317,7 @@ small {
 
 .copyright {
     text-align: center;
-
+    margin-bottom: 0;
 }
 
 /*-------media-query-for-max-width-800---------*/
