@@ -13,16 +13,17 @@
     <div class="row justify-content-center">
         <div class="col-md-8 mb-5">
             <div class="card">
-                <div class="card-header">{{ __('New Product') }}</div>
+                <div class="card-header">{{ __('Update Product') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('product_store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('product_update') }}" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="id" value="{{ $data->id }}">
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" value="{{ old('name') }}">
+                                    name="name" value="{{ old('name')!=null ? old('name') : $data->name }}">
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -38,12 +39,23 @@
                                 <select class="form-control @error('category') is-invalid @enderror" name="category"
                                     id="category">
                                     <option value="">Choose category</option>
+                                    @if (old('category'))
                                     @foreach ($category as $item)
-                                    <option value="{{ $item }}" {{ old('category')==$item ? 'selected' : '' }}>
+                                    <option value="{{ $item }}"
+                                        {{ old('category')==$item ? 'selected' : $data->price }}>
                                         {{ $item }}
                                     </option>
                                     @endforeach
-                                </select> @error('category') <span class="invalid-feedback" role="alert">
+                                    @else
+                                    @foreach ($category as $item)
+                                    <option value="{{ $item }}"
+                                        {{ $data->category==$item ? 'selected' : $data->price }}>
+                                        {{ $item }}
+                                    </option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                                @error('category') <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -55,7 +67,7 @@
                             <div class="col-md-6">
                                 <textarea id="detail" type="text" rows="15"
                                     class="form-control @error('detail') is-invalid @enderror"
-                                    name="detail">{{ old('detail') }}</textarea>
+                                    name="detail">{{ old('detail')!=null ?old('detail') : $data->detail }}</textarea>
                                 @error('detail')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -69,7 +81,7 @@
                             <div class="col-md-6">
                                 <input id="price" type="number"
                                     class="form-control @error('price') is-invalid @enderror" name="price"
-                                    value="{{ old('price') }}">
+                                    value="{{ old('price')!=null ?old('price') : $data->price  }}">
                                 @error('price')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -94,7 +106,7 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-5">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Add Product  ') }}
+                                    {{ __('Update Product  ') }}
                                 </button>
                             </div>
                         </div>

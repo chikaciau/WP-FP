@@ -87,9 +87,12 @@
                                 </div>
                                 <div class="col-3">
                                     <div class="btn-group" role="group" style="float: right">
-                                        <a href="" class="btn btn-secondary icon-a">
-                                            <i class="bi bi-trash"></i></a>
-                                        <a href="" class="btn btn-secondary icon-a">
+                                        <a href="{{ route('product_destroy', ['id' => $pro->id]) }}"
+                                            class="btn btn-secondary icon-a">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                        <a href="{{ route('product_edit', ['id' => $pro->id]) }}"
+                                            class="btn btn-secondary icon-a">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
                                     </div>
@@ -114,6 +117,34 @@
     Swal.fire({
         title: 'Success',
         text: "successfully added a new product",
+        icon: 'success',
+        confirmButtonText: 'Ok'
+    })
+
+</script>
+@endsection
+@endif
+
+@if (Session::has('success-edit'))
+@section('js')
+<script>
+    Swal.fire({
+        title: 'Success',
+        text: "Successfully updated the product",
+        icon: 'success',
+        confirmButtonText: 'Ok'
+    })
+
+</script>
+@endsection
+@endif
+
+@if (Session::has('success-delete'))
+@section('js')
+<script>
+    Swal.fire({
+        title: 'Success',
+        text: "successfully deleted the product",
         icon: 'success',
         confirmButtonText: 'Ok'
     })

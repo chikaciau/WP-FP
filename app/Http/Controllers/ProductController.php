@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -94,11 +95,12 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
         $data = Product::find($id);
+        $category = collect(['Food', 'Electronics', 'Beauty', 'Pet']);
 
-        return view('product.detail', ['data' => $data]);
+        return view('product.edit', ['data' => $data, 'category' => $category]);
     }
 
     /**
@@ -108,9 +110,35 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request)
     {
-        //
+        $product = Product::find($request->id);
+        
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'category' => 'required',
+            'detail' => 'required',
+            'price' => 'required|integer',
+            'photo' => 'required|mimes:jpg,jpeg,png'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+            ->route('product_edit', ['id'=>$request->id])
+            ->withErrors($validator)
+            ->withInput();
+        }
+        $validated = $validator->validated();
+        File::delete('images/'.$product->photo);
+        $new_name = Storage::disk('public')->put('images' , $request->file('photo'));
+        $explode = explode('/',$new_name);
+        $validated['photo'] = $explode[1];
+
+        $product->update($validated);
+
+        Session::flash('success-update');
+
+        return redirect()->route('product');
     }
 
     /**
@@ -119,8 +147,14 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+
+        File::delete('images/'.$product->photo);
+        $product->delete();
+        
+        Session::flash('success-delete');
+        return redirect()->route('product');
     }
 }
