@@ -1,13 +1,21 @@
 @extends('layouts.main')
 
+@section('css')
+<style>
+    .col-4 {
+        margin: 0
+    }
+
+</style>
+@endsection
+
 @section('content')
 <!-------------- Our Featured Products -------------->
 
 <div class="small-container categories">
-
     <h2 class="title">
         <blockquote class="blockquote">
-            <p class=" mb-0 display-5">Products</p>
+            <p class="mb-0 display-5">Products</p>
         </blockquote>
     </h2>
     <div class="row">
@@ -20,4 +28,9 @@
             <p>{{ $pro->price }}</p>
         </div>
         @endforeach
+        <div class="col-lg-12 mb-5">
+            {{ $products->links() }}
+        </div>
     </div>
+</div>
+@endsection

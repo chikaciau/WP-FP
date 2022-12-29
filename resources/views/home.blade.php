@@ -81,3 +81,18 @@ $a = 0;
 </div>
 
 @endsection
+
+@if (Session::has('success-register'))
+
+@section('js')
+<script>
+    Swal.fire({
+        title: 'Success',
+        text: "Successfully Registered",
+        icon: 'success',
+        confirmButtonText: 'Ok'
+    })
+
+</script>
+@endsection
+@endif

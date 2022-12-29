@@ -1,10 +1,16 @@
 @php
 $country = ['Indonesia', 'United States', 'Argentina', 'Costa Rica', 'Japan', 'Brazil'];
-// dd(($errors->all()));
 @endphp
 
 @extends('layouts.main')
+@section('css')
+<style>
+    .row {
+        justify-content: space-around;
+    }
 
+</style>
+@endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -123,7 +129,7 @@ $country = ['Indonesia', 'United States', 'Argentina', 'Costa Rica', 'Japan', 'B
                             <div class="col-md-6">
                                 <select class="form-control @error('country') is-invalid @enderror" name="country"
                                     id="country">
-                                    <option value="">--- Choose Country ---</option>
+                                    <option value="">Choose Country</option>
                                     @for($a=0;$a<count($country);$a++) <option value="{{ $country[$a] }}"
                                         {{ old('country')==$country[$a] ? 'selected' : '' }}>
                                         {{ $country[$a] }}

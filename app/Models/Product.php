@@ -9,6 +9,8 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $guarded = [''];
+
     public function scopeSearch($query, $search)
     {
         $query->when($search ?? false, function($query, $search){

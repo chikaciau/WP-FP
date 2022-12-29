@@ -28,10 +28,12 @@
             <p>{{ $data->category }}</p>
             <h1>{{ $data->name }}</h1>
             <h4>Rp. {{ number_format($data->price) }}</h4>
+            @can('user')
             <form action="">
                 <input type="number" value="1">
                 <button type="submit" class="btn">Add To Cart</button>
             </form>
+            @endcan
 
             <h3>PRODUCT DETAILS</h3>
             <br>

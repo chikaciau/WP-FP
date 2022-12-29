@@ -11,6 +11,7 @@
 
 
 <!-------------js for toggle menu-------------->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     var MenuItems = document.getElementById("MenuItems");
@@ -26,3 +27,4 @@
     }
 
 </script>
+@yield('js')

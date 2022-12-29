@@ -1,5 +1,14 @@
 @extends('layouts.main')
 
+@section('css')
+<style>
+    .row {
+        justify-content: space-around;
+    }
+
+</style>
+@endsection
+
 @section('content')
 <div class="container small-container">
     <div class="row justify-content-center">

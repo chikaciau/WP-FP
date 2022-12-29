@@ -24,7 +24,6 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {   
-        // dd($request->all());
         $category = collect(['Food', 'Electronics', 'Beauty', 'Pet']);
         $product = Product::search($request->search)->get();
 
@@ -36,4 +35,15 @@ class HomeController extends Controller
 
         return view('home', $data);
     }
+
+        public function category($category)
+        {
+            $product = Product::where('category', $category)->paginate(10);
+
+            $data = [
+            'products' => $product
+            ];
+
+            return view('product.productByCategories', $data);
+        }
 }

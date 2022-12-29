@@ -27,6 +27,10 @@
         transform: none;
     }
 
+    .row {
+        justify-content: space-around;
+    }
+
 </style>
 @endsection
 
@@ -56,7 +60,8 @@
                 </div>
         </form>
         <div class="col-lg-3 offset-lg-4">
-            <a class="btn btn-outline-secondary rounded" id='add' href="{{ route('product_add') }}">Search</a>
+            <a class="btn btn-outline-secondary rounded" id='add' href="{{ route('product_add') }}">
+                Add Product +</i></a>
         </div>
     </div>
 
@@ -95,15 +100,24 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="col-4">
-            <a href="{{ route('product_detail', ['id'=>$pro->id]) }}">
-        <img src="{{ asset('images/'.$pro->photo) }}">
-        </a>
-        <h4><a href="product-details.html">{{ $pro->name }}</a></h4>
-        <p>{{ $pro->price }}</p>
-    </div> --}}
-    @endforeach
+        @endforeach
+        <div class="mb-5">
+            {{ $products->links() }}
+        </div>
+    </div>
 </div>
-</div>
-
 @endsection
+
+@if (Session::has('success-store'))
+@section('js')
+<script>
+    Swal.fire({
+        title: 'Success',
+        text: "successfully added a new product",
+        icon: 'success',
+        confirmButtonText: 'Ok'
+    })
+
+</script>
+@endsection
+@endif
