@@ -1,12 +1,32 @@
+            @php
+            $Ncategory = ['Food', 'Electronics', 'Beauty', 'Pet'];
+            @endphp
             <div class="navbar">
                 <div class="logo">
-                    <a href="index.html"><img src="{{ asset('images/logo.png')  }}" width="125px"></}}a>
+                    <a href="{{ route('home') }}"><img src="{{ asset('images/logo.png')  }}" width="125px"></a>
                 </div>
                 <nav>
                     <ul id="MenuItems">
-                        <li class="nav-item"><a href="{{ route('home') }}">Home</a></li>
-                        <li class="nav-item"><a href="products.html">Products</a></li>
-                        <li class="nav-item"><a href="">About</a></li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown">
+                                Category
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                @for($a=0;$a<count($Ncategory);$a++) <a class="dropdown-item"
+                                    href="{{ route('product_category', ['category' =>$Ncategory[$a] ]) }}">
+                                    {{ $Ncategory[$a] }}</a>
+                                    @endfor
+                            </div>
+                        </li>
+                        @can('user')
+                        <li class="nav-item"><a href="cart.html"><img src="images/cart.png" width="30px"
+                                    height="30px"></a></li>
+                        @endcan
+
+                        @can('admin')
+                        <li class="nav-item"><a href="{{ route('product') }}">Manage Product</a></li>
+                        @endcan
                         <!-- Authentication Links -->
                         @guest
                         @if (Route::has('login'))
@@ -28,6 +48,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}">Profile</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -36,7 +57,6 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
-                                <a class="dropdown-item" href="{{ route('logout') }}">Cart</a>
                             </div>
                         </li>
                         @endguest

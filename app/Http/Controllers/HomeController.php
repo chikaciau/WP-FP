@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,8 +22,18 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        return view('home');
+    public function index(Request $request)
+    {   
+        // dd($request->all());
+        $category = collect(['Food', 'Electronics', 'Beauty', 'Pet']);
+        $product = Product::search($request->search)->get();
+
+        $data = [
+            'categories' => $category,
+            'products' => $product,
+            'search' => $request->search
+        ];
+
+        return view('home', $data);
     }
 }

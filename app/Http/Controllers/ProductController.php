@@ -12,9 +12,31 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        //
+        // dd(1);
+        $product = Product::paginate(5);
+
+        $data = [
+        'products' => $product
+        ];
+
+        return view('product.index', $data);
+
+    }
+
+    public function category($category)
+    {
+
+        $product = Product::where('category', $category)->paginate(10);
+
+        $data = [
+            'products' => $product
+        ];
+
+        return view('product.productByCategories', $data);
+
     }
 
     /**
@@ -38,15 +60,12 @@ class ProductController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        $data = Product::find($id);
+
+        return view('product.detail', ['data' => $data]);
+        // dd($data);
     }
 
     /**

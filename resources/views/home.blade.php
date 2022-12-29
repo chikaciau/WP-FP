@@ -1,165 +1,83 @@
+@php
+$a = 0;
+@endphp
 @extends('layouts.main')
+@section('css')
+<style>
+    form input {
+        height: 100%;
+    }
 
-@section('hero')
-@include('layouts.hero')
+</style>
 @endsection
 
 @section('content')
 <!-------------- Our Featured Products -------------->
 
 <div class="small-container categories">
-    <h2 class="title">Featured Products</h2>
-    <div class="row">
-        <div class="col-4">
+    <form action="" method="get" class="mb-5">
+        <div class="row">
+            <div class="col-lg-10">
+                <input type="text" name="search" class="form-control" value="{{ request()->get('search') }}"
+                    placeholder="Search">
+            </div>
+            <div class="col-lg-2">
+                <button class="btn btn-outline-secondary btn-search rounded" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
 
-            <a href="product-details.html"><img src="images/product-1.jpg"></a>
-            <h4><a href="product-details.html">Red Printed T-Shirt</a></h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
-        </div>
-        <div class="col-4">
-            <img src="{{ asset('images/product-2.jpg') }}">
-            <h4>HRX Sports Shoes</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-            </div>
-            <p>$75.00</p>
-        </div>
-        <div class="col-4">
-            <img src="{{ asset('images/product-3.jpg') }}">
-            <h4>HRX Gray Trackpants</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-            </div>
-            <p>$45.00</p>
-        </div>
-        <div class="col-4">
-            <img src="{{ asset('images/product-4.jpg') }}">
-            <h4>Blue Printed T-Shirt</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$55.00</p>
-        </div>
-    </div>
-    <h2 class="title">Latest Products</h2>
+    @if ($search != null)
+    <h2 class="title">
+        <blockquote class="blockquote">
+            <p class=" mb-0 display-5">Products</p>
+        </blockquote>
+    </h2>
     <div class="row">
+        @foreach($products as $pro)
         <div class="col-4">
-            <img src="{{ asset('images/product-5.jpg') }}">
-            <h4>Puma Gray Sports Shoes</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$95.00</p>
+            <a href="{{ route('product_detail', ['id'=>$pro->id]) }}">
+                <img src="{{ asset('images/'.$pro->photo) }}">
+            </a>
+            <h4><a href="product-details.html">{{ $pro->name }}</a></h4>
+            <p>{{ $pro->price }}</p>
         </div>
-        <div class="col-4">
-            <img src="{{ asset('images/product-6.jpg') }}">
-            <h4>Black Printed T-Shirt</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-            </div>
-            <p>$55.00</p>
-        </div>
-        <div class="col-4">
-            <img src="{{ asset('images/product-7.jpg') }}">
-            <h4>HRX Set of 3 Socks</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-            </div>
-            <p>$30.00</p>
-        </div>
-        <div class="col-4">
-            <img src="{{ asset('images/product-8.jpg') }}">
-            <h4>Black Fossil Watch</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$120.00</p>
-        </div>
+        @endforeach
     </div>
+    @else
+
+    @foreach ($categories as $cat)
+    <h2 class="title">
+        <blockquote class="blockquote">
+            <p class=" mb-0 display-5">{{ $cat }}</p>
+            <footer class="blockquote-footer"><a href="{{ route('product_category', ["category" => $cat]) }}">View
+                    More</a></footer>
+        </blockquote>
+    </h2>
     <div class="row">
+        @foreach($products as $pro)
+        @if ($pro->category == $cat)
         <div class="col-4">
-            <img src="{{ asset('images/product-9.jpg') }}">
-            <h4>Black Sportx Watch</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$135.00</p>
+            <a href="{{ route('product_detail', ['id'=>$pro->id]) }}">
+                <img src="{{ asset('images/'.$pro->photo) }}">
+            </a>
+            <h4><a href="product-details.html">{{ $pro->name }}</a></h4>
+            <p>{{ $pro->price }}</p>
         </div>
-        <div class="col-4">
-            <img src="{{ asset('images/product-10.jpg') }}">
-            <h4>Black HRX Shoes</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-            </div>
-            <p>$50.00</p>
-        </div>
-        <div class="col-4">
-            <img src="{{ asset('images/product-11.jpg') }}">
-            <h4>Gray Nike Shoes</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-            </div>
-            <p>$55.00</p>
-        </div>
-        <div class="col-4">
-            <img src="{{ asset('images/product-12.jpg') }}">
-            <h4>HRX Black Trackpants</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$75.00</p>
-        </div>
+        @php
+        $a++;
+        if($a==4){
+        break;
+        $a = 0;
+        }
+        @endphp
+        @endif
+        @endforeach
     </div>
+    @endforeach
+
+    @endif
+
 </div>
+
 @endsection
