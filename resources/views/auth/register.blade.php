@@ -15,7 +15,7 @@ $country = ['Indonesia', 'United States', 'Argentina', 'Costa Rica', 'Japan', 'B
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 mb-5">
-            <div class="card">
+            <div class="card my-4">
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">

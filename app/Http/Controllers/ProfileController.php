@@ -23,7 +23,7 @@ class ProfileController extends Controller
             'user' => $user
         ];
 
-        return view('profile.index', $user);
+        return view('profile.index', $data);
 
     }
 }
