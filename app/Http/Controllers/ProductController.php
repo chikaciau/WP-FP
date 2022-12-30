@@ -80,14 +80,7 @@ class ProductController extends Controller
 
         return redirect()->route('product');
 
-    }
-
-    public function show($id)
-    {
-        $data = Product::find($id);
-
-        return view('product.detail', ['data' => $data]);
-    }
+    } 
 
     /**
      * Show the form for editing the specified resource.

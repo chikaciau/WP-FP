@@ -40,7 +40,7 @@ $a = 0;
                 <img src="{{ asset('images/'.$pro->photo) }}">
             </a>
             <h4><a href="product-details.html">{{ $pro->name }}</a></h4>
-            <p>{{ $pro->price }}</p>
+            <p>Rp. {{ number_format($pro->price) }}</p>
         </div>
         @endforeach
     </div>
@@ -62,7 +62,7 @@ $a = 0;
                 <img src="{{ asset('images/'.$pro->photo) }}">
             </a>
             <h4><a href="product-details.html">{{ $pro->name }}</a></h4>
-            <p>{{ $pro->price }}</p>
+            <p>Rp. {{ number_format($pro->price) }}</p>
         </div>
         @php
         $a++;

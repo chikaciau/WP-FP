@@ -21,11 +21,11 @@
     <div class="row">
         @foreach($products as $pro)
         <div class="col-4">
-            <a href="product-details.html">
+            <a href="{{ route('product_detail', ["id" => $pro->id]) }}">
                 <img src="{{ asset('images/'.$pro->photo) }}">
             </a>
-            <h4><a href="product-details.html">{{ $pro->name }}</a></h4>
-            <p>{{ $pro->price }}</p>
+            <h4><a href="{{ route('product_detail', ["id" => $pro->id]) }}">{{ $pro->name }}</a></h4>
+            <p>Rp. {{ number_format($pro->price) }}</p>
         </div>
         @endforeach
         <div class="col-lg-12 mb-5">

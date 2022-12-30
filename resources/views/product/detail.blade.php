@@ -29,8 +29,11 @@
             <h1>{{ $data->name }}</h1>
             <h4>Rp. {{ number_format($data->price) }}</h4>
             @can('user')
-            <form action="">
-                <input type="number" value="1">
+            <form action="{{ route('cart_store') }}" method="POST">
+                @csrf
+                <input type="hidden" name='id' value="{{ $data->id }}">
+                <input type="hidden" name='price' value="{{ $data->price }}">
+                <input type="number" name='qty' value="1" min="1">
                 <button type="submit" class="btn">Add To Cart</button>
             </form>
             @endcan

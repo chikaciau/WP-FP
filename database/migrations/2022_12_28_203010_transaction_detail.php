@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transactionDetails', function (Blueprint $table) {
+        Schema::create('transaction_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('transaction_id')->constrained()
             ->onUpdate('cascade')
@@ -22,7 +22,6 @@ return new class extends Migration
             ->constrained()
             ->onUpdate('cascade')
             ->nullOnDelete();
-            $table->string('product_name');
             $table->Integer('qty');
             $table->bigInteger('sub_total');
             $table->timestamps();

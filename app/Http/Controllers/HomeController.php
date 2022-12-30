@@ -36,6 +36,13 @@ class HomeController extends Controller
         return view('home', $data);
     }
 
+    public function show($id)
+    {
+        $data = Product::find($id);
+
+        return view('product.detail', ['data' => $data]);
+    }
+
         public function category($category)
         {
             $product = Product::where('category', $category)->paginate(10);

@@ -20,8 +20,10 @@
                             </div>
                         </li>
                         @can('user')
-                        <li class="nav-item"><a href="cart.html"><img src="images/cart.png" width="30px"
-                                    height="30px"></a></li>
+                        <li class="nav-item">
+                            <a href="{{ route('cart') }}">
+                                <img src="{{ asset('images/cart.png') }}" width="30px" height="30px">
+                            </a></li>
                         @endcan
 
                         @can('admin')
@@ -49,6 +51,9 @@
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>
+                                @can('user')
+                                <a class="dropdown-item" href="{{ route('transaction') }}">Transaction</a>
+                                @endcan
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
