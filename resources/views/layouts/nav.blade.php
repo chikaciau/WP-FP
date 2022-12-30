@@ -3,7 +3,7 @@
             @endphp
             <div class="navbar">
                 <div class="logo">
-                    <a href="{{ route('home') }}"><img src="{{ asset('images/logo.png')  }}" width="125px"></a>
+                    <a href="{{ route('home') }}">Barbatos</a>
                 </div>
                 <nav>
                     <ul id="MenuItems">

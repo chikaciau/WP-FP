@@ -40,7 +40,7 @@
 <div class="small-container categories">
     <h2 class="title">
         <blockquote class="blockquote">
-            <p class=" mb-0 display-5">Yor Shoping Cart</p>
+            <p class=" mb-0 display-5">Your Shoping Cart</p>
         </blockquote>
     </h2>
     <div class="row">
