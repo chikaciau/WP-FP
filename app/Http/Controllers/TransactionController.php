@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('is_user');
+    }
+
     public function index()
     {
         $id = Auth::id();
